@@ -1,0 +1,6 @@
+package utils;
+
+public enum Cardinal {
+    NORTH,SOUTH,EAST,WEST,CENTER,NORTH_EAST,NORTH_WEST,SOUTH_EAST,SOUTH_WEST
+
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ExempleAnt" default="compile" basedir=".">
+    <property name="project.sources.dir" value="src"/>
+    <property name="project.resources.dir" value="resources"/>
+    <property name="project.bin.dir" value="bin"/>
+    <path id="project.classpath">
+        <pathelement location="${project.bin.dir}"/>
+    </path>
+    <target name="compile" description="Compilation des classes" depends="init">
+        <javac srcdir="${project.sources.dir}" destdir="${project.bin.dir}" debug="on" optimize="off" deprecation="on" includeantruntime="false">
+            <classpath refid="project.classpath"/>
+        </javac>
+        <copy todir="${basedir}/${project.bin.dir}/resources">
+            <fileset dir="${basedir}/${project.resources.dir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="init">
+        <echo message="Initialisation de ${ant.project.name}"/>
+        <mkdir dir="${basedir}/${project.bin.dir}/src"/>
+    </target>
+
+    <target name="run" description="execution" depends="compile">
+        <java classname="graphics.Main" fork="true">
+            <classpath refid="project.classpath"/>
+        </java>
+    </target>
+
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="bin"/>
+    </target>
+</project>
+
